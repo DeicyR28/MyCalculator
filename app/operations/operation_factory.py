@@ -1,4 +1,4 @@
-from app.operations import addition, subtraction
+from app.operations import addition, division, subtraction, multiply
 from app.operations.operation import Operation
 
 class OperationFactory:
@@ -18,6 +18,13 @@ class OperationFactory:
         
         if op_name == "subtract":   
             return subtraction.Subtraction(operand1, operand2)
+        
+        if op_name == "multiply":
+            return multiply.Multiply(operand1, operand2)
+        
+        if op_name == "divide":
+            return division.Division(operand1, operand2)
+        
         else:
             raise ValueError("Invalid operation: " + inputWords[0])
 
