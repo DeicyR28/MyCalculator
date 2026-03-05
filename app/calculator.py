@@ -1,3 +1,5 @@
+from app.operations.operation_factory import OperationFactory
+
 def calculator ():
     print("welcome to my calculator")
     while True:
@@ -6,8 +8,12 @@ def calculator ():
             if command == 'exit':
                 print ("bye")
                 break
+            else:
+                thisOperation = OperationFactory.create_operation(command)
+                print(thisOperation.execute())
+
         except Exception as e:
-            print(f"Error while reading comman from user : {e}")         
+            print(f"Error - {e}")         
 
 
 
