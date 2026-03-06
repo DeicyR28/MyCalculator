@@ -1,4 +1,5 @@
-from app.operations import addition, division, subtraction, multiply
+from app.operations import addition, division, subtraction, multiply, modular, power
+from app.operations.modular import Modular
 from app.operations.operation import Operation
 
 class OperationFactory:
@@ -24,6 +25,12 @@ class OperationFactory:
         
         if op_name == "divide":
             return division.Division(operand1, operand2)
+        
+        if op_name == "modular":
+            return modular.Modular(operand1, operand2)
+        
+        if op_name == "power":
+            return power.Power(operand1, operand2)
         
         else:
             raise ValueError("Invalid operation: " + inputWords[0])
