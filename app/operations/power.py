@@ -1,9 +1,10 @@
 from app.operations.operation import Operation
 
 class Power(Operation):
-    def __init__(self, operand1, operand2):
-        self.operand1 = operand1
-        self.operand2 = operand2
+    def __init__(self, operand1: float, operand2: float):
+        super().__init__(operand1,operand2)
+        self.calcType = 'Power'
 
     def execute(self):
-        return self.operand1 ** self.operand2
+        self.result = self.operand1 ** self.operand2
+        return self.result
