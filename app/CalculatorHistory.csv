@@ -1,0 +1,4 @@
+operand1,operand2,calcType,result
+1.0,1.0,Add,2.0
+3.0,9.0,Multiply,27.0
+2.0,6.0,Power,64.0

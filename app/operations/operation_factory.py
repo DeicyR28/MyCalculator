@@ -34,6 +34,12 @@ class OperationFactory:
         
         else:
             raise ValueError("Invalid operation: " + inputWords[0])
+
+    @staticmethod
+    def create_operation_from_dict(data: dict) -> Operation:
+        opt = OperationFactory.create_operation(f"{data["calcType"]} {data["operand1"]} {data["operand2"]}")
+        opt.result = data["result"]
+        return opt
         
         
 
