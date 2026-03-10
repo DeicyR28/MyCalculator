@@ -6,6 +6,7 @@ The application automatically keeps a history of every operation you execute and
 
 Features:
 - Perform basic math operations by giving commads when prompted as fallow:
+
     Add 1 1
     
     Subtract 5 10
