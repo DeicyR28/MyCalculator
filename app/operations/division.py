@@ -6,5 +6,8 @@ class Division(Operation):
         self.calcType = 'Divide'
 
     def execute(self):
+        if self.operand2 == 0:
+            raise ValueError("Cannot divide by zero")
+            
         self.result = self.operand1 / self.operand2
         return self.result

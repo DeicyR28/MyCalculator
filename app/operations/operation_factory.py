@@ -1,4 +1,4 @@
-from app.operations import addition, division, subtraction, multiply, modular, power
+from app.operations import addition, division, subtraction, multiply, modular, power, absulute_difference, integer_division, percent, root
 from app.operations.modular import Modular
 from app.operations.operation import Operation
 
@@ -31,6 +31,18 @@ class OperationFactory:
         
         if op_name == "power":
             return power.Power(operand1, operand2)
+        
+        if op_name == "absdiff":
+            return absulute_difference.AbsoluteDifference(operand1, operand2)
+
+        if op_name == "intdiv":
+            return integer_division.IntegerDivision(operand1, operand2)
+
+        if op_name == "percent":
+            return percent.Percent(operand1, operand2)
+
+        if op_name == "root":
+            return root.Root(operand1, operand2)
         
         else:
             raise ValueError("Invalid operation: " + inputWords[0])

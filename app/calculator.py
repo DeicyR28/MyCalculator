@@ -24,21 +24,44 @@ class Calculator:
      df = pd.read_csv(self.get_history_file_path)
      self.history = [ OperationFactory.create_operation_from_dict(row) for _, row in df.iterrows()]
 
+ def clear_history(self) -> None:
+  if self.get_history_file_path.exists():
+    os.remove(self.get_history_file_path)
+  if self.history:
+    self.history.clear()
+
+
  @property
  def get_history_file_path(self) -> Path:
    app_root = Path(__file__).parent 
    return app_root / os.getenv("HISTORY_FILE_NAME")
+
          
  def start(self):
     print("welcome to my calculator")
     while True:
         try:
             command = input("\nEnter command: ").lower().strip()
+            if command == 'help':
+                    # Display available commands
+                    print("\nAvailable commands:")
+                    print("  add, subtract, multiply, divide, power, root, percent, intdiv, absdiv,  - Perform calculations")
+                    print("  history - Show calculation history")
+                    print("  clear - Clear all calculation history")
+                    print("  Calculation history is auto saved to file")
+                    print("  Calculation history is auto loaded if it was previusly saved")
+                    print("  exit - Exit the calculator")
+                    continue
+
             if command == 'exit':
                 self.save_history()
                 print ("bye")
                 break
-            if command == 'history':
+                
+            elif command == 'clear':
+              self.clear_history()
+
+            elif command == 'history':
                if not self.history:
                   print("No calculations in history")
                else:
