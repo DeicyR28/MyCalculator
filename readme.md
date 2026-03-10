@@ -17,6 +17,10 @@ Features:
     
     Divide 6 3
 
+    History
+
+    exit
+
 - Command-line interface
 - History of calculations
 
