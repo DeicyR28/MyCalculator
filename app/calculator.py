@@ -9,6 +9,12 @@ import pandas as pd
 class Calculator:
  def __init__(self):
     self.history: List[Operation] = []
+    if self.get_history_file_path.exists():
+         try:
+           self.load_history()
+         except Exception as e:
+            logging.warning(f"Could not load existing history: {e}")
+    
 
  def save_history(self) -> None:
    df = pd.DataFrame([op.to_dict() for op in self.history])
@@ -22,16 +28,8 @@ class Calculator:
  def get_history_file_path(self) -> Path:
    app_root = Path(__file__).parent 
    return app_root / os.getenv("HISTORY_FILE_NAME")
-   #return Path.home() / os.getenv("HISTORY_FILE_NAME")  
          
  def start(self):
-    if self.get_history_file_path.exists():
-         try:
-           self.load_history()
-         except Exception as e:
-            # Log a warning if history could not be loaded
-            logging.warning(f"Could not load existing history: {e}")
-
     print("welcome to my calculator")
     while True:
         try:
