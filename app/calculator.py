@@ -5,6 +5,10 @@ from pathlib import Path
 from app.operations.operation import Operation
 from app.operations.operation_factory import OperationFactory
 import pandas as pd
+import colorama
+from colorama import Fore, Style
+
+colorama.init()
 
 class Calculator:
  def __init__(self):
@@ -38,17 +42,22 @@ class Calculator:
 
          
  def start(self):
-    print("welcome to my calculator")
+    print(Fore.GREEN + "Welcome to my calculator")
     while True:
         try:
-            command = input("\nEnter command: ").lower().strip()
+            print(Fore.GREEN + "\nEnter command: ", end="") #.lower().strip()
+            print(Fore.BLUE, end="")
+            command = input().lower().strip()
+            print(Style.RESET_ALL, end="")
+
             is_valid, result = self.validate_command(command)
             if not is_valid:
-              print(result)
+              print(Fore.RED + result)
+              print(Style.RESET_ALL)
 
             elif command == 'help':
                     # Display available commands
-                    print("\nAvailable commands:")
+                    print(Fore.LIGHTBLACK_EX + "\nAvailable commands:")
                     print("  add, subtract, multiply, divide, power, root, percent, intdiv, absdiv,  - Perform calculations")
                     print("  history - Show calculation history")
                     print("  clear - Clear all calculation history")
@@ -56,11 +65,12 @@ class Calculator:
                     print("  Calculation history is auto loaded if it was previusly saved")
                     print("  exit - Exit the calculator")
                     print(" example, enter command: add 5 10   And your result will be 15")
+                    print(Style.RESET_ALL)
                     continue
 
             elif command == 'exit':
                 self.save_history()
-                print ("bye")
+                print (Fore.LIGHTYELLOW_EX + "bye")
                 break
                 
             elif command == 'clear':
@@ -68,11 +78,13 @@ class Calculator:
 
             elif command == 'history':
                if not self.history:
-                  print("No calculations in history")
+                  print(Fore.LIGHTYELLOW_EX + "No calculations in history")
+                  print(Style.RESET_ALL)
                else:
-                  print("\nCalculations History:")
+                  print(Fore.LIGHTBLACK_EX + "\nCalculations History:")
                   for i, entry in enumerate(self.history, 1):
                             print(f"{i}. {entry}")
+                  print(Style.RESET_ALL)
             else:
                 thisOperation = OperationFactory.create_operation(command)
                 print(thisOperation.execute())
