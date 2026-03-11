@@ -6,7 +6,7 @@ The application automatically keeps a history of every operation you execute and
 
 Features:
 - Perform basic math operations by giving commads when prompted as fallow:
-
+    add, subtract, multiply, divide, power, root, percent, intdiv, absdiff
     Add 1 1
     
     Subtract 5 10
@@ -17,7 +17,15 @@ Features:
     
     Divide 6 3
 
+    Percent 100 10
+
+    IntDiv 6 4
+
+    ABSdiff 8 3
+
     History
+
+    Clear
 
     exit
 
