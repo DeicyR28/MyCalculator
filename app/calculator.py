@@ -58,7 +58,7 @@ class Calculator:
             elif command == 'help':
                     # Display available commands
                     print(Fore.LIGHTBLACK_EX + "\nAvailable commands:")
-                    print("  add, subtract, multiply, divide, power, root, percent, intdiv, absdiv,  - Perform calculations")
+                    print("  add, subtract, multiply, divide, power, root, percent, intdiv, absdiff,  - Perform calculations")
                     print("  history - Show calculation history")
                     print("  clear - Clear all calculation history")
                     print("  Calculation history is auto saved to file")
