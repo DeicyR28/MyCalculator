@@ -42,7 +42,11 @@ class Calculator:
     while True:
         try:
             command = input("\nEnter command: ").lower().strip()
-            if command == 'help':
+            is_valid, result = self.validate_command(command)
+            if not is_valid:
+              print(result)
+
+            elif command == 'help':
                     # Display available commands
                     print("\nAvailable commands:")
                     print("  add, subtract, multiply, divide, power, root, percent, intdiv, absdiv,  - Perform calculations")
@@ -51,9 +55,10 @@ class Calculator:
                     print("  Calculation history is auto saved to file")
                     print("  Calculation history is auto loaded if it was previusly saved")
                     print("  exit - Exit the calculator")
+                    print(" example, enter command: add 5 10   And your result will be 15")
                     continue
 
-            if command == 'exit':
+            elif command == 'exit':
                 self.save_history()
                 print ("bye")
                 break
@@ -72,10 +77,35 @@ class Calculator:
                 thisOperation = OperationFactory.create_operation(command)
                 print(thisOperation.execute())
                 self.history.append(thisOperation)
-
         except Exception as e:
-            print(f"Error - {e}")     
-         
+            print(f"Error - {e}")
+  
+
+ def validate_command(self,command_str):
+    if command_str in ['help', 'exit', 'history', 'clear']:
+        return True, None
+
+    # 1. Split the string by whitespace
+    parts = command_str.split()
+
+    # 2. Check if there are exactly 3 parts (Operation, Num1, Num2)
+    if len(parts) != 3:
+        return False, "Error: Command must follow format 'Operation Num1 Num2' type 'help' for more info."
+
+    operation = parts[0]
+    if operation.lower() not in ['add', 'subtract', 'multiply', 'divide', 'power', 'root', 'percent', 'intdiv', 'absdiff']:
+        return False, f"Error: Unsupported operation '{operation}'. Supported operations are: add, subtract, multiply, divide, power, root, percent, intdiv, absdiff."
+    
+    # 3. Try to convert the last two parts to numbers (floats handle decimals too)
+    try:
+        num1 = float(parts[1])
+        num2 = float(parts[2])
+    except ValueError:
+        return False, "Error: The second and third values must be numbers."
+
+    # 4. If everything passes, return the cleaned data
+    return True, (operation, num1, num2)
+        
       
 
 
